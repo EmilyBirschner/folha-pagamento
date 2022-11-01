@@ -1,21 +1,18 @@
-import java.util.Scanner;
-
 public class FolhaPagamento {
 
-    double calcularSalario() {
-        Scanner scanner = new Scanner(System.in);
+    Holerite calcularSalario (int horasNormais, int horasExtras, ContratoTrabalho contrato){
+        Holerite holerite = new Holerite();
+        holerite.funcionario = contrato.funcionario;
+        holerite.valorTotalHorasNormais = horasNormais * contrato.valorHoraNormal;
+        holerite.valorTotalHorasExtras = horasExtras * contrato.valorHoraExtra;
 
-        System.out.println("Digite a quantidade de horas trabalhadas: ");
-        int horasNormaisTrabalhadas = scanner.nextInt();
-        System.out.println("Digite a quantidade de horas extras trabalhadas: ");
-        int horasExtrasTrabalhadas = scanner.nextInt();
-        System.out.println("Digite o valor da hora normal: ");
-        double valorHoraNormal = scanner.nextDouble();
-        System.out.println("Digite o valor da hora extra: ");
-        double valorHoraExtra = scanner.nextDouble();
+        double subtotal = holerite.valorTotalHorasNormais +holerite.valorTotalHorasExtras;
 
-        return (horasExtrasTrabalhadas * valorHoraExtra) +
-                (horasNormaisTrabalhadas * valorHoraNormal);
+        if (contrato.possuiAdicionalParaFilhos()){
+            holerite.adicionalParaFilhos = subtotal * 1.10;
+        }
+
+        return holerite;
 
     }
 }
